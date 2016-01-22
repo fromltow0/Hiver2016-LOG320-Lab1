@@ -80,12 +80,12 @@ public class DeuxiemeAlgorithme
     */
     public boolean estUnAnagramme(char[] chaine1, char[] chaine2)
     {
-        chronometre.start();
+        //chronometre.start();
         
         if(chaine1.length != chaine2.length)
         {
-            finDeTraitement = true;
-            chronometre.setFinDeTraitement(finDeTraitement);
+            //finDeTraitement = true;
+            //chronometre.setFinDeTraitement(finDeTraitement);
             return false;
         }
         else
@@ -106,13 +106,13 @@ public class DeuxiemeAlgorithme
             {
                 if( tableau1[j] != tableau2[j] )
                 {
-                    finDeTraitement = true;
-                    chronometre.setFinDeTraitement(finDeTraitement);
+                    //finDeTraitement = true;
+                    //chronometre.setFinDeTraitement(finDeTraitement);
                     return false;
                 }
             }
-            finDeTraitement = true;
-            chronometre.setFinDeTraitement(finDeTraitement);
+            //finDeTraitement = true;
+            //chronometre.setFinDeTraitement(finDeTraitement);
             return true;
         }    
     }
