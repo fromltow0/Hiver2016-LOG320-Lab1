@@ -38,6 +38,7 @@ public class TextFileProcessing
     private static final char ESPACE = ' ';
     private static final int MOINS_UN = -1;
     private static final int ZERO = 0;
+    private static final char CARACTERE_A = 'a';
     
     private Path cheminMots;
     private Path cheminDictionnaire;
@@ -50,6 +51,8 @@ public class TextFileProcessing
     
     private HashMap mot_nombreAnagrammes;
     
+    private HashMap motDictionnaire_nombreAnagrammes;
+    
     private DeuxiemeAlgorithme algorithme2;
     
     public static void main(String[] args)
@@ -58,6 +61,7 @@ public class TextFileProcessing
         
         traitement.creerListeDeMotsEnMemoire();
         traitement.creerListeDeMotsDictionnaire();
+        traitement.determinerAnagrammesDictionnaire();
         traitement.compterAnagrammesDeUnMot();
     }
     
@@ -107,8 +111,11 @@ public class TextFileProcessing
             //Initialisation de la liste de mots du dictionnaire.
             motsDuDictionnaire = new ArrayList<char[]>();
             
-            //Initialisation de la hashmap mots-nombreAnagramme.
+            //Initialisation de la hashmap mot-nombreAnagrammes.
             mot_nombreAnagrammes = new HashMap();    
+            
+            //Initialisation de la hashmap motDictionnaire_nombreAnagrammes.
+            motDictionnaire_nombreAnagrammes = new HashMap();
             
             algorithme2 = new DeuxiemeAlgorithme();
         } 
@@ -152,18 +159,94 @@ public class TextFileProcessing
                     String nouvelleLignePartie1 = ligneActuelle.substring(ZERO , indexOfEspace);
                     String nouvelleLignePartie2 = ligneActuelle.substring(indexOfEspace + 1);
                     String nouvelleLigne = nouvelleLignePartie1.concat(nouvelleLignePartie2);
-                    String nouvelleLigne2 = nouvelleLigne.toLowerCase();
                     
-                    motDeLaListeDeMots = nouvelleLigne2.toCharArray();
+                    motDeLaListeDeMots = nouvelleLigne.toCharArray();
                     
-                    listeDeMots.add(motDeLaListeDeMots);
+                    int i = 0;
+                    
+                    /*
+                    Cette variable prend la valeur "true" lorsque un mot
+                    qu'on veut inserer dans la liste e mots du dictionnaire
+                    contient un caractere en majuscule.Elle prend la valeur
+                    "false" dans le cas contraire.
+                    */
+                    boolean majuscule = false;
+                    while( i < motDeLaListeDeMots.length )
+                    {
+                        int difference = 0;
+                        
+                        /*
+                        On recupere le code ASCII de chaque caractere et on 
+                        soustrait ce code ASCII au code ASCII du caractere
+                        'a'.
+                        */
+                        difference = motDeLaListeDeMots[i] - CARACTERE_A;
+                        
+                        /*
+                        Si le resultat de cette soustraction est un
+                        nombre negatif, alors on est en presence d'un 
+                        caractere en majuscule.La variable "majuscule" prend
+                        alors la valeur "true".
+                        */
+                        if( difference < ZERO )
+                        {
+                            majuscule = true;
+                        }
+                        
+                        i += 1;
+                    }
+                    
+                    //S'il n'y a pas de majuscule, on ajoute le mot à la liste
+                    //de mots du dictionnaire.
+                    if( !majuscule )
+                    {
+                        listeDeMots.add(motDeLaListeDeMots);
+                    }    
                 }
                 else
                 {
-                    String ligneActuelle2 = ligneActuelle.toLowerCase();
-                    motDeLaListeDeMots = ligneActuelle2.toCharArray();
+                    motDeLaListeDeMots = ligneActuelle.toCharArray();
                     
-                    listeDeMots.add(motDeLaListeDeMots);
+                    int i = 0;
+                    
+                    /*
+                    Cette variable prend la valeur "true" lorsque un mot
+                    qu'on veut inserer dans la liste e mots du dictionnaire
+                    contient un caractere en majuscule.Elle prend la valeur
+                    "false" dans le cas contraire.
+                    */
+                    boolean majuscule = false;
+                    while( i < motDeLaListeDeMots.length )
+                    {
+                        int difference = 0;
+                        
+                        /*
+                        On recupere le code ASCII de chaque caractere et on 
+                        soustrait ce code ASCII au code ASCII du caractere
+                        'a'.
+                        */
+                        difference = motDeLaListeDeMots[i] - CARACTERE_A;
+                        
+                        /*
+                        Si le resultat de cette soustraction est un
+                        nombre negatif, alors on est en presence d'un 
+                        caractere en majuscule.La variable "majuscule" prend
+                        alors la valeur "true".
+                        */
+                        if( difference < ZERO )
+                        {
+                            majuscule = true;
+                        }
+                        
+                        i += 1;
+                    }
+                    
+                    //S'il n'y a pas de majuscule, on ajoute le mot à la liste
+                    //de mots du dictionnaire.
+                    if( !majuscule )
+                    {
+                       listeDeMots.add(motDeLaListeDeMots);
+                    }    
                 }
             }
         }
@@ -207,18 +290,94 @@ public class TextFileProcessing
                     String nouvelleLignePartie1 = ligneActuelle.substring(ZERO , indexOfEspace);
                     String nouvelleLignePartie2 = ligneActuelle.substring(indexOfEspace + 1);
                     String nouvelleLigne = nouvelleLignePartie1.concat(nouvelleLignePartie2);
-                    String nouvelleLigne2 = nouvelleLigne.toLowerCase();
                     
-                    motDuDictionnaire = nouvelleLigne2.toCharArray();
+                    motDuDictionnaire = nouvelleLigne.toCharArray();
                     
-                    motsDuDictionnaire.add(motDuDictionnaire);
+                    int i = 0;
+                    
+                    /*
+                    Cette variable prend la valeur "true" lorsque un mot
+                    qu'on veut inserer dans la liste e mots du dictionnaire
+                    contient un caractere en majuscule.Elle prend la valeur
+                    "false" dans le cas contraire.
+                    */
+                    boolean majuscule = false;
+                    while( i < motDuDictionnaire.length )
+                    {
+                        int difference = 0;
+                        
+                        /*
+                        On recupere le code ASCII de chaque caractere et on 
+                        soustrait ce code ASCII au code ASCII du caractere
+                        'a'.
+                        */
+                        difference = motDuDictionnaire[i] - CARACTERE_A;
+                        
+                        /*
+                        Si le resultat de cette soustraction est un
+                        nombre negatif, alors on est en presence d'un 
+                        caractere en majuscule.La variable "majuscule" prend
+                        alors la valeur "true".
+                        */
+                        if( difference < ZERO )
+                        {
+                            majuscule = true;
+                        }
+                        
+                        i += 1;
+                    }
+                    
+                    //S'il n'y a pas de majuscule, on ajoute le mot à la liste
+                    //de mots du dictionnaire.
+                    if( !majuscule )
+                    {
+                        motsDuDictionnaire.add(motDuDictionnaire);
+                    }
                 }
                 else
                 {
-                    String ligneActuelle2 = ligneActuelle.toLowerCase();
-                    motDuDictionnaire = ligneActuelle2.toCharArray();
+                    motDuDictionnaire = ligneActuelle.toCharArray();
                     
-                    motsDuDictionnaire.add(motDuDictionnaire);
+                    int i = 0;
+                    
+                    /*
+                    Cette variable prend la valeur "true" lorsque un mot
+                    qu'on veut inserer dans la liste e mots du dictionnaire
+                    contient un caractere en majuscule.Elle prend la valeur
+                    "false" dans le cas contraire.
+                    */
+                    boolean majuscule = false;
+                    while( i < motDuDictionnaire.length )
+                    {
+                        int difference = 0;
+                        
+                        /*
+                        On recupere le code ASCII de chaque caractere et on 
+                        soustrait ce code ASCII au code ASCII du caractere
+                        'a'.
+                        */
+                        difference = motDuDictionnaire[i] - CARACTERE_A;
+                        
+                        /*
+                        Si le resultat de cette soustraction est un
+                        nombre negatif, alors on est en presence d'un 
+                        caractere en majuscule.La variable "majuscule" prend
+                        alors la valeur "true".
+                        */
+                        if( difference < ZERO )
+                        {
+                            majuscule = true;
+                        }
+                        
+                        i += 1;
+                    }
+                    
+                    //S'il n'y a pas de majuscule, on ajoute le mot à la liste
+                    //de mots du dictionnaire.
+                    if( !majuscule )
+                    {
+                        motsDuDictionnaire.add(motDuDictionnaire);
+                    }
                 }
             }
         }
@@ -294,6 +453,96 @@ public class TextFileProcessing
         }  
         
         System.out.println(motsDuDictionnaire.size());
+    }
+    
+    public void determinerAnagrammesDictionnaire()
+    {
+        /*
+        On verifie d'abord si pour un ensemble de lettres qui constitue un mot
+        du dictionnaire, le nombre d'anagrammes présents dans le dictionnaire
+        a déja été trouvé.Si le nombre d'anagrammes a déja été trouvé on ne 
+        le calcule plus et on passe au mot suivant.Exemple:Dans le 
+        dictionnaire, nous avons les mots "aze", "zea", "eza", "qsd", "aze".
+        Nous commencons par chercher le nombre d'anagrammes du mot "aze".Nous
+        trouvons 4 anagrammes.Ensuite, nous cherchons le nombre d'anagrammes
+        pour le mot "zea".A ce moment, nous nous rendons compte que "aze" et
+        "zea" représentent le meme ensemble de lettres et possèdent donc le 
+        meme nombre d'anagrammes.Vu que nous avons déja déterminé le nombre
+        d'anagrammes pour l'ensemble consititué des lettres 'a', 'z', 'e',
+        il est inutile de chercher le nombre d'anagrammes pour "zea".Si
+        l'ensemble de lettres constituant le mot pour lequel on cherche le 
+        nombre d'anagrammes était différent de l'ensemble contenant les
+        lettres 'a', 'z', 'e', nous aurions constaté que le nombre
+        d'anagrammes de cet ensemble n'a pas encore été déterminé et nous
+        l'aurions calculé.Après avoir travaillé avec "zea", nous passons au
+        mot suivant qui est "eza" et nous repetons le meme processus.
+        passons donc au mot suivant et repetons le meme processus.
+        */
+        for(int i = 0; i < motsDuDictionnaire.size(); i++)
+        {
+            //Cette variable represente le nombre d'anagrammes d'un mot
+            //du dictionnaire.
+            int nombreAnagrammes = 0;
+            
+            //Recuperer chaque mot du dictionnaire.
+            char[] mot1 = motsDuDictionnaire.get(i);
+            
+            
+            int j = i - 1;
+            
+            //Si pour un ensemble de mots, le nombre d'anagrammes a déja été
+            //déterminé, cette variable prend la valeur "true", sinon elle
+            //prend la valeur "false".
+            boolean anagrammeDejaEvalue = false;
+            
+            while( j >= 0 && (!anagrammeDejaEvalue) )
+            {
+                //Recuperer chaque mot precedant le mot pour lequel on 
+                //veut determiner le nombre d'anagrammes.
+                char[] mot2 = motsDuDictionnaire.get(j);
+                
+                //Determiner si chaque mot qui précède le mot pour lequel
+                //on veut determiner le nombre d'anagrammes est un anagramme
+                //du mot pour lequel on veut determiner le nombre d'anagramme.
+                anagrammeDejaEvalue = algorithme2.estUnAnagramme(mot2, mot1);
+                
+                j -= 1;
+            }
+            
+            //Si on n'a pas encore trouve le nombre d'anagrammes du mot pour
+            //lequel on veut determiner le nombre d'anagrammes
+            if( !anagrammeDejaEvalue )
+            {
+                /*
+                On est certain que les mots précédant le mot pour lequel on
+                veut determiner le nombre d'anagrammes ne sont pas des
+                anagrammes du mot pour lequel on veut determiner le nombre
+                d'anagrammes.On debute donc la recherche d'anagrammes dans la
+                structure contenant les mots du dictionnaire à partir de
+                l'indice d'acces au mot  pour lequel on veut determiner le
+                nombre d'anagrammes.
+                */
+                for(int k = i; k < motsDuDictionnaire.size(); k++)
+                {
+                    char[] mot3 = motsDuDictionnaire.get(k);
+                    
+                    boolean anagramme = algorithme2.estUnAnagramme(mot3, mot1);
+                    
+                    if( anagramme )
+                    {
+                        nombreAnagrammes += 1;
+                    }   
+                }
+            } 
+            
+            //On utilise un hashmap pour établir une correspondance entre
+            //un mot du dictionnaire et son nombre d'anagrammes dans le
+            //dictionnaire.
+            if(nombreAnagrammes > ZERO)
+            {
+                motDictionnaire_nombreAnagrammes.put( mot1, nombreAnagrammes );
+            }
+        } 
     }
     
     /*************************************

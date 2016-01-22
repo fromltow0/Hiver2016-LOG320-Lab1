@@ -16,8 +16,8 @@ public class TestAlgorithmes
         AlgorithmeDeBase algorithme = new AlgorithmeDeBase();
         DeuxiemeAlgorithme algorithme2 = new DeuxiemeAlgorithme();
         
-        StringBuilder chaine = new StringBuilder("manoir");
-        StringBuilder anagramme = new StringBuilder("minora");
+        StringBuilder chaine = new StringBuilder("azerty14");
+        StringBuilder anagramme = new StringBuilder("azerty14");
         
         
         char[] chaineArray = algorithme2.getCharArrayFromString( chaine.toString() );

@@ -90,15 +90,15 @@ public class DeuxiemeAlgorithme
         }
         else
         {
-            int[] tableau1 = new int[26];
-            int[] tableau2 = new int[26];
+            int[] tableau1 = new int[123];
+            int[] tableau2 = new int[123];
             
             int i = 0;
             
             while(i < chaine1.length)
             {
-                tableau1[ chaine1[i] - CARACTERE_A] += 1;
-                tableau2[ chaine2[i] - CARACTERE_A] += 1;
+                tableau1[ chaine1[i] ] += 1;
+                tableau2[ chaine2[i] ] += 1;
                 i++;
             }
             
