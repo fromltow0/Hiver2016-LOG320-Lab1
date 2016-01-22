@@ -122,10 +122,11 @@ public class TextFileProcessing
       FUNCTION  : creerListeDeMotsEnMemoire
      *************************************
     *Description    : Cette fonction lit les mots contenus dans le fichier
-                      texte contenant les mots à analyser, convertit ces mots
-                      en tableaux de caracteres et place ces tableaux de
-                      caractères dans la structure de données représentant notre
-                      liste de mots.
+                      texte contenant les mots à analyser, élimine les espaces
+                      contenus dans ces mots, mets ces mots en minuscules,
+                      convertit ces mots en tableaux de caracteres et place ces
+                      tableaux de caractères dans la structure de données 
+                      représentant notre liste de mots.
                       
     @param  aucun : 
      
@@ -136,12 +137,34 @@ public class TextFileProcessing
     public void creerListeDeMotsEnMemoire() 
     {
         String ligneActuelle;
+        char[] motDeLaListeDeMots;
         
         try
         {
             while ( (ligneActuelle = bufferMots.readLine() ) != null)
-            {
-		listeDeMots.add( ligneActuelle.toCharArray() );   
+            { 
+                //Si la chaine de caractères contient un espace, alors
+                //supprimer cet espace de la chaine.
+                if( ligneActuelle.indexOf(ESPACE) != MOINS_UN )
+                {
+                    int indexOfEspace = ligneActuelle.indexOf(ESPACE);
+                    
+                    String nouvelleLignePartie1 = ligneActuelle.substring(ZERO , indexOfEspace);
+                    String nouvelleLignePartie2 = ligneActuelle.substring(indexOfEspace + 1);
+                    String nouvelleLigne = nouvelleLignePartie1.concat(nouvelleLignePartie2);
+                    String nouvelleLigne2 = nouvelleLigne.toLowerCase();
+                    
+                    motDeLaListeDeMots = nouvelleLigne2.toCharArray();
+                    
+                    listeDeMots.add(motDeLaListeDeMots);
+                }
+                else
+                {
+                    String ligneActuelle2 = ligneActuelle.toLowerCase();
+                    motDeLaListeDeMots = ligneActuelle2.toCharArray();
+                    
+                    listeDeMots.add(motDeLaListeDeMots);
+                }
             }
         }
         catch(IOException ex)
@@ -155,10 +178,10 @@ public class TextFileProcessing
      *************************************
     *Description    : Cette fonction lit les mots contenus dans le fichier
                       texte représentant le dictionnaire,élimine les espaces
-                      contenus dans ces mots, convertit ces mots
-                      en tableaux de caracteres et place ces tableaux de
-                      caractères dans la structure de données chargée de
-                      contenir les mots du dictionnaire.
+                      contenus dans ces mots, mets ces mots en minuscules,
+                      convertit ces mots en tableaux de caracteres et place ces
+                      tableaux de caractères dans la structure de données 
+                      chargée de contenir les mots du dictionnaire.
                       
     @param  aucun : 
      
