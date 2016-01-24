@@ -16,8 +16,8 @@ public class TestAlgorithmes
         AlgorithmeDeBase algorithme = new AlgorithmeDeBase();
         DeuxiemeAlgorithme algorithme2 = new DeuxiemeAlgorithme();
         
-        StringBuilder chaine = new StringBuilder("azerty14");
-        StringBuilder anagramme = new StringBuilder("azerty14");
+        StringBuilder chaine = new StringBuilder("azertyuiopmlkjnhbgfvcdsxqw123654789874563210mpolkiujhytgfdcqazsedrtryfhcnvkjoilpm78451239220vnvbhjderu  784qdfghjjlmpotieytetcgbv12369754123658tpelfyeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqq111111111111111111111111112222222222222222222222225555555555555555555555555555555555555566666666666666666666666666666ccccccccpmlouhjnhsfs");
+        StringBuilder anagramme = new StringBuilder("azertyuiopmlkjnhbgfvcdsxqw123654789874563210mpolkiujhytgfdcqazsedrtryfhcnvkjoilpm78451239220vnvbhjderu  784qdfghjjlmpotieytetcgbv12369754123658tpelfyeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqq111111111111111111111111112222222222222222222222225555555555555555555555555555555555555566666666666666666666666666666ccccccccpmlouhjnhsfs");
         
         
         char[] chaineArray = algorithme2.getCharArrayFromString( chaine.toString() );

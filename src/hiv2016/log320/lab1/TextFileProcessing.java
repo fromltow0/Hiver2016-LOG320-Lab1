@@ -8,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,8 +49,17 @@ public class TextFileProcessing
     private BufferedReader bufferMots;
     private BufferedReader bufferDictionnaire;
     
+    //Cette variable contient la liste de mots pour lesquels on veut determiner
+    //lenombre d'anagrammes presents dans le dictionnaire.
     private ArrayList<char[]> listeDeMots;
+    
+    //Cette variable contient tous les mots du dictionnaire.
     private ArrayList<char[]> motsDuDictionnaire;
+    
+    //Cette variable contient les ensembles de lettres qui constituent des mots
+    //qui sont presents dans le dictionnaire et pour lesquels on a determine
+    //le nombre d'anarammes presents dans le dictionnaire.
+    ArrayList<char[]> tableauMotsDictionnaire;
     
     private HashMap mot_nombreAnagrammes;
     
@@ -62,7 +74,8 @@ public class TextFileProcessing
         traitement.creerListeDeMotsEnMemoire();
         traitement.creerListeDeMotsDictionnaire();
         traitement.determinerAnagrammesDictionnaire();
-        traitement.compterAnagrammesDeUnMot();
+        traitement.remplirTableauMotsDictionnaire();
+        
     }
     
     /*************************************
@@ -110,6 +123,8 @@ public class TextFileProcessing
             
             //Initialisation de la liste de mots du dictionnaire.
             motsDuDictionnaire = new ArrayList<char[]>();
+            
+            tableauMotsDictionnaire = new ArrayList<char[]>();
             
             //Initialisation de la hashmap mot-nombreAnagrammes.
             mot_nombreAnagrammes = new HashMap();    
@@ -387,74 +402,6 @@ public class TextFileProcessing
         }   
     }
     
-     /*************************************
-      FUNCTION  : compterAnagrammesDeUnMot
-     *************************************
-    *Description    : Cette fonction détermine pour chaque mot de la liste de 
-                      mots, le nombre d'anagrammes présents dans le
-                      dictionnaire.On détermine ici pour chaque ensemble
-                      de lettres qui constituent un mot, le nombre d'anagrammes
-                      présents dans le dictionnaire.Exemple: Si dans la liste de
-                      mots, nous avons "aze" et dans le dictionnaire nous avons
-                      "aze", "zea", "eza", alors la fonction détermine que pour
-                      l'ensemble constitué des lettres 'a', 'z', 'e' il y a dans
-                      le dictionnaire 3 anagrammes qui sont "aze", "zea" et 
-                      "eza".Le mot "aze" est aussi compté comme un anagramme du
-                      mot "aze".
-                      
-    @param  aucun : 
-     
-    @return       : 
-     - void.
-       
-    */
-    public void compterAnagrammesDeUnMot()
-    {
-        for(int i = 0; i < listeDeMots.size(); i++)
-        {
-            //Récupérer chaque mot de la liste de mots
-            char[] mot1 = listeDeMots.get(i);
-            
-            //Cette variable représente le nombre d'anagrammes
-            //de chaque mot de la liste de mots.
-            int nombreAnagrammes = 0;
-            
-            System.out.println("------------" + String.valueOf(mot1));
-            
-            //Déterminer si chaque mot du dictionnaire est un anagramme
-            //du mot stocké dans la variable "mot1".
-            for(int j = 0; j < motsDuDictionnaire.size(); j++)
-            {
-                char[] mot2 = motsDuDictionnaire.get(j);
-                
-                boolean anagramme = algorithme2.estUnAnagramme(mot2, mot1);
-                
-                //Si un mot du dictionnaire est un anagramme du mot stocké
-                //dans la variable "mot1",
-                if(anagramme)
-                {
-                    //alors incrémenter le nombre d'anagrammes de 1.
-                    nombreAnagrammes += 1;
-                    System.out.println(anagramme);
-                }
-                
-                  
-            }
-            /*
-            Après avoir déterminé le nombre d'anagrammes d'un mot de la liste
-            de mots, on établit une correspondance entre un mot de la liste de
-            mots et le nombre d'anagrammes trouvés pour ce mot.Pour cela on
-            utilise une hashmap qui fait correspondre à chaque mot de la liste
-            de mots un nombre qui représente le nombre d'anagrammes qui
-            correspondent à ce mot et qui sont présents dans le dictionnaire.
-            */
-            mot_nombreAnagrammes.put(mot1, nombreAnagrammes);
-            System.out.println("mot: " + String.valueOf(mot1) + "----" + "nombre anagrammes: " + nombreAnagrammes);
-        }  
-        
-        System.out.println(motsDuDictionnaire.size());
-    }
-    
     public void determinerAnagrammesDictionnaire()
     {
         /*
@@ -545,6 +492,49 @@ public class TextFileProcessing
         } 
     }
     
+     /*************************************
+      FUNCTION  : getListeDeMots
+     *************************************
+    *Description : Cette fonction crée un tableau contenant les mots du dictionnaire
+                   qui figurent dans la hashmap qui etablit la correspondance entre
+                   un mot du dictionnaire et le nombre d'anagrammes de ce mot dans 
+                   le dictionnaire.La hashmap qui etablit la correspondance entre 
+                   un mot du dictionnaire et le nombre d'anagrammes de ce mot dans
+                   le dictionnaire doit etre au prealable etablie avant de pouvoir 
+                   appeler cette fonction.Ce tableau sera utilise pour reduire optimiser
+                   le temps de detection du nombre d'anagrammes de chaque mot de la
+                   la liste de mots.
+                      
+    *Parameters  :
+     - aucun
+     
+    @return      : 
+     - void.
+       
+    */
+    public void remplirTableauMotsDictionnaire()
+    {
+        Set ensemble = motDictionnaire_nombreAnagrammes.entrySet();
+        
+        Iterator i = ensemble.iterator();
+    
+        while( i.hasNext() )
+        {
+            //Recuperer une entree de la hashmap.
+            Map.Entry entree = (Map.Entry)i.next();
+            
+            //Recuperer la cle de l'entree que l'on a recuperee precedemment
+            //et convertir cette cle en chaine de caracteres.
+            String unMot = String.valueOf(entree.getKey());
+            
+            //Convertir la chaine de caracteres en tableau de caracteres.
+            char[] motDuDictionnaire = unMot.toCharArray();
+            
+            //Ajouter le tableau de caracteres  au tableau.
+            tableauMotsDictionnaire.add(motDuDictionnaire);
+        }
+    }
+    
     /*************************************
       FUNCTION  : getListeDeMots
      *************************************
@@ -562,4 +552,41 @@ public class TextFileProcessing
         return listeDeMots;
     }
     
+    /*************************************
+      FUNCTION  : getMotDictionnaire_nombreAnagrammes
+     *************************************
+    *Description : Cette fonction retourne la hashmap qui fait la correspondance
+                   entre chaque mot du dictionnaire et le nombre d'anagrammes
+                   de chaque mot du dictionnaire. 
+                      
+    *Parameters  :
+     - aucun
+     
+    @return      : 
+     - HashMap.
+       
+    */
+    public HashMap getMotDictionnaire_nombreAnagrammes()
+    {
+        return motDictionnaire_nombreAnagrammes;
+    }
+    
+    /*************************************
+      FUNCTION  : getTableauMotsDictionnaire
+     *************************************
+    *Description : Cette fonction retourne le tableau contenant les mots du
+                   dictionnaire presents dans la hashmap "motDictionnaire_
+                   nombreAnagrammes".
+                      
+    *Parameters  :
+     - aucun
+     
+    @return      : 
+     - ArrayList<char[]>.
+       
+    */
+     public ArrayList<char[]> getTableauMotsDictionnaire()
+    {
+        return tableauMotsDictionnaire;
+    }
 }

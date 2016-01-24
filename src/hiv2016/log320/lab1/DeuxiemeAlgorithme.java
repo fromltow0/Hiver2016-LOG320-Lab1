@@ -22,6 +22,7 @@ package hiv2016.log320.lab1;
 public class DeuxiemeAlgorithme 
 {
     private static final char CARACTERE_A = 'a';
+    private static final int ZERO = 0;
     
     private volatile boolean finDeTraitement = false;
     private ChronometreThread chronometre;
@@ -51,8 +52,26 @@ public class DeuxiemeAlgorithme
                       Si les variables "chaine1" et "chaine2" n'ont pas les
                       memes caracteres alors, "chaine1" n'est pas un anagramme
                       de "chaine2" et la fonction retourne la valeur "false".
-                      
-                      
+                      Le principe utilise par la fonction est le suivant:
+                      Soit le mot "manoir" et son anagramme "romain".Il y a
+                      autant de 'm', 'a', 'n', 'o', 'i', 'r' dans "manoir" que
+                      dans "romain".Considerons le code ASCII de chaque
+                      caractere du mot "manoir".Pour 'm' le code ASCII est 109,
+                      pour 'a' le code ASCII est 97, pour 'n' le code ASCII est
+                      '110', pour 'o' le code ASCII est 111, pour 'i' le code
+                      ASCII est '105' et pour 'r' le code ASCII est 114.
+                      Additionnons ces codes ASCII.109 + 97 + 110 +111 +105 +114
+                      .Nous obtenons 646 que nous nommons "sommeA".Si nous 
+                      determinons le code ASCII de chaque caractere du mot 
+                      "romain" et que nous additionnons ces codes ASCII, nous
+                      obtenons 646 que nous nommons "sommeB".Faisons maintenant
+                      la difference de "sommeA" et "sommeB"."sommeA" - "sommeB"=
+                      646 - 646 = 0.Nous constatons donc que lorsqu'on a un mot
+                      A qui est un anagramme d'un mot B, si on effectue la
+                      difference de la **somme des codes ASCII des caracteres
+                      du mot A** et de la **somme des codes ASCII des caracteres
+                      du mot B**, le resultat de cette difference est zero.
+                                   
     *Parameters     :
     @param  chaine1 : 
             TYPE    : char[]
@@ -80,41 +99,36 @@ public class DeuxiemeAlgorithme
     */
     public boolean estUnAnagramme(char[] chaine1, char[] chaine2)
     {
-        //chronometre.start();
+        chronometre.start();
         
+        //Si les chaines sont de longueurs differentes
+        //alors retourner "false".
         if(chaine1.length != chaine2.length)
         {
-            //finDeTraitement = true;
-            //chronometre.setFinDeTraitement(finDeTraitement);
+            finDeTraitement = true;
+            chronometre.setFinDeTraitement(finDeTraitement);
             return false;
         }
-        else
+        
+        int valeur = 0;
+        
+        for(int i = 0; i < chaine1.length; i++)
         {
-            int[] tableau1 = new int[123];
-            int[] tableau2 = new int[123];
-            
-            int i = 0;
-            
-            while(i < chaine1.length)
-            {
-                tableau1[ chaine1[i] ] += 1;
-                tableau2[ chaine2[i] ] += 1;
-                i++;
-            }
-            
-            for(int j = 0; j < tableau1.length; j++)
-            {
-                if( tableau1[j] != tableau2[j] )
-                {
-                    //finDeTraitement = true;
-                    //chronometre.setFinDeTraitement(finDeTraitement);
-                    return false;
-                }
-            }
-            //finDeTraitement = true;
-            //chronometre.setFinDeTraitement(finDeTraitement);
-            return true;
-        }    
+            valeur += chaine1[i];
+            valeur -= chaine2[i];
+        }
+        
+        if(valeur != ZERO)
+        {
+            finDeTraitement = true;
+            chronometre.setFinDeTraitement(finDeTraitement);
+            return false;
+        }
+        
+        finDeTraitement = true;
+        chronometre.setFinDeTraitement(finDeTraitement);
+        return true;
+        
     }
     
     public char[] getCharArrayFromString(String chaine)
