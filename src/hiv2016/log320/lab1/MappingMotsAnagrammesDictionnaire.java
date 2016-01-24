@@ -33,10 +33,7 @@ import java.util.HashMap;
                                              HashMap motDictionnaire_nombreAnagrammes)
 
 *Methods        :
-    public void creerListeDeMotsEnMemoire()
-    public void creerListeDeMotsDictionnaire()
-    public ArrayList<char[]>getListeDeMots()
-    
+    public void compterAnagrammesDeUnMot()
 */
 public class MappingMotsAnagrammesDictionnaire 
 {

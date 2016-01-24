@@ -6,16 +6,15 @@ package hiv2016.log320.lab1;
  *************************************
 @author Louis Wilfried MBOG
     
-*Description    : This class implements an algorithm of cost "n" which verifies
-                  if a word is an anagram of an another word.This algorithm only
-                  works with lower case characters.
-                  
-                      
+*Description    : Cette classe implemente un algorithme de cout 'n' qui verifie
+                  si un mot est un anagramme d'un autre mot.
+                                    
 *Constructors   :
     public DeuxiemeAlgorithme()
 
 *Methods        :
     public boolean estUnAnagramme(char[] chaine1, char[] chaine2)
+    public char[] getCharArrayFromString(String chaine)
     public ChronometreThread getChronometreThread()
     
 */
@@ -127,10 +126,27 @@ public class DeuxiemeAlgorithme
         
         finDeTraitement = true;
         chronometre.setFinDeTraitement(finDeTraitement);
-        return true;
-        
+        return true;   
     }
     
+    /*************************************
+      FUNCTION  : getCharArrayFromString
+     *************************************
+    *Description    : Cette fonction retourne le tableau de caracteres
+                      correspondant a une chaine de caracteres passee
+                      en parametres.
+                                      
+    *Parameters     :
+    @param  chaine  : 
+            TYPE    : String
+            
+        DESCRIPTION : chaine de caractères pour laquelle on desire obtenir le
+                      tableau de caracteres.
+     
+    @return         : 
+     - char[].
+       
+    */
     public char[] getCharArrayFromString(String chaine)
     {
         return chaine.toCharArray();

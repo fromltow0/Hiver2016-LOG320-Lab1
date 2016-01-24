@@ -5,8 +5,10 @@ package hiv2016.log320.lab1;
  *************************************
 @author Louis Wilfried MBOG
     
-*Description    : This class implements a basic algorithm in order to verify
-                  if a word is an anagram of an another word.
+*Description    : Cette classe implement un algorithme de base qui verifie qu'un
+                  mot est un anagramme d'un autre mot.Il s'agit de l'algorithme
+                  de la section "Algorithme de base" de l'enonce du laboratoire
+                  1.
                       
 *Constructors   :
     public AlgorithmeDeBase()

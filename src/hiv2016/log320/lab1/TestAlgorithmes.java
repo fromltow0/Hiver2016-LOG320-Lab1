@@ -1,14 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hiv2016.log320.lab1;
 
-/**
- *
- * @author Camx0
- */
+/*************************************
+  CLASS         : TestAlgorithmes
+ *************************************
+@author Louis Wilfried MBOG
+    
+*Description    : Cette classe effectue une comparaison entre le temps 
+                  d'execution de l'algorithme de l'enonce du laboratoire et le
+                  temps d'execution de l'algorithme que nous avons implemente.
+                                   
+*Constructors   :
+    aucun
+
+*Methods        :
+    public static void main(String[] args)
+    
+*/
 public class TestAlgorithmes 
 {
     public static void main(String[] args)

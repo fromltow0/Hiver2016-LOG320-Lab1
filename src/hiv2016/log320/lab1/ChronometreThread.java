@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hiv2016.log320.lab1;
 
 /*************************************
@@ -17,7 +13,7 @@ package hiv2016.log320.lab1;
     public ChronometreThread(boolean finDeTraitement)
 
 *Methods        :
-    public ChronometreThread(boolean finDeTraitement)
+    public void run()
     public void setFinDeTraitement(boolean finDeTraitement)
     public long getTempsExecution()
     public void afficherTempsExecution()

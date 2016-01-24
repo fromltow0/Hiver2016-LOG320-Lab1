@@ -22,7 +22,26 @@ import java.util.logging.Logger;
 *Description    : Cette classe effectue le traitement des fichiers texte.Elle
                   transforme les données contenues dans les fichiers texte de
                   façon à les rendre directement exploitables par un programme
-                  JAVA.
+                  JAVA.Les pretraitements effectues sont les suivants:
+                  1-Recuperation des donnees contenues dans les fichiers texte.
+                  2-Pour chaque ensemble de lettres present dans le dictionnaire
+                  et a partir duquel est forme un ou plusieurs mots du
+                  dictionnaire,il ya determinatin du nombred'anagrammes presents
+                  dans le dictionnaire et etablissement d'une correspondance
+                  entre cet ensemble de lettres et son nombre d'anagrammes grace
+                  a une hashmap.
+                  3-Creation d'une structure de donnees contenant les mots pour
+                  lesquels on veut trouver le nombre d'anagrammes dans le
+                  dictionnaire.
+                  4-Creation d'une structure de donnees contenant les mots du
+                  dictionnaire pour lesquels on a determine le nombre
+                  d'anagrammes presentsdans le dictionnaire.Cette structure
+                  de donnees optimisera le processus de detection du nombre 
+                  d'anagrammes pour chaque mot de notre liste de mots dans 
+                  laquelle se trouvent les mots pour lesquels on desire
+                  connaitre le nombre d'anagrammes presents dans le
+                  dictionnaire.
+                 
                   
                       
 *Constructors   :
@@ -31,7 +50,11 @@ import java.util.logging.Logger;
 *Methods        :
     public void creerListeDeMotsEnMemoire()
     public void creerListeDeMotsDictionnaire()
+    public void determinerAnagrammesDictionnaire()
+    public void remplirTableauMotsDictionnaire()
     public ArrayList<char[]>getListeDeMots()
+    public HashMap getMotDictionnaire_nombreAnagrammes()
+    public ArrayList<char[]> getTableauMotsDictionnaire()
     
 */
 public class TextFileProcessing 
@@ -585,7 +608,7 @@ public class TextFileProcessing
      - ArrayList<char[]>.
        
     */
-     public ArrayList<char[]> getTableauMotsDictionnaire()
+    public ArrayList<char[]> getTableauMotsDictionnaire()
     {
         return tableauMotsDictionnaire;
     }
