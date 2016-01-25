@@ -15,16 +15,11 @@ package hiv2016.log320.lab1;
 *Methods        :
     public boolean estUnAnagramme(char[] chaine1, char[] chaine2)
     public char[] getCharArrayFromString(String chaine)
-    public ChronometreThread getChronometreThread()
     
 */
 public class DeuxiemeAlgorithme 
 {
-    private static final char CARACTERE_A = 'a';
     private static final int ZERO = 0;
-    
-    private volatile boolean finDeTraitement = false;
-    private ChronometreThread chronometre;
     
     /*************************************
       CONSTRUCTOR : DeuxiemeAlgorithme
@@ -32,7 +27,7 @@ public class DeuxiemeAlgorithme
     */
     public DeuxiemeAlgorithme()
     {
-        chronometre = new ChronometreThread(finDeTraitement);
+        
     }
     
     /*************************************
@@ -98,14 +93,13 @@ public class DeuxiemeAlgorithme
     */
     public boolean estUnAnagramme(char[] chaine1, char[] chaine2)
     {
-        chronometre.start();
         
         //Si les chaines sont de longueurs differentes
         //alors retourner "false".
         if(chaine1.length != chaine2.length)
         {
-            finDeTraitement = true;
-            chronometre.setFinDeTraitement(finDeTraitement);
+            //finDeTraitement = true;
+            //chronometre.setFinDeTraitement(finDeTraitement);
             return false;
         }
         
@@ -113,20 +107,10 @@ public class DeuxiemeAlgorithme
         
         for(int i = 0; i < chaine1.length; i++)
         {
-            valeur += chaine1[i];
-            valeur -= chaine2[i];
+            valeur += chaine1[i] - chaine2[i];
         }
         
-        if(valeur != ZERO)
-        {
-            finDeTraitement = true;
-            chronometre.setFinDeTraitement(finDeTraitement);
-            return false;
-        }
-        
-        finDeTraitement = true;
-        chronometre.setFinDeTraitement(finDeTraitement);
-        return true;   
+        return ( valeur == ZERO );
     }
     
     /*************************************
@@ -150,27 +134,6 @@ public class DeuxiemeAlgorithme
     public char[] getCharArrayFromString(String chaine)
     {
         return chaine.toCharArray();
-    }
-    
-    /*************************************
-      FUNCTION OF TYPE "GETTER"  : getChronometreThread
-     *************************************
-    *Description    : Cette fonction retourne l'objet représentant le 
-                      chronomètre associé à la classe "AlgorithmeDeBase" et
-                      chargé de calculer le temps d'exécution des fonctions
-                      de la classe "AlgorithmeDeBase"
-                                      
-    *Parameters     :
-     - aucun
-     
-    @return         : 
-     - objet de type "ChronometreThread"représentant le chronomètre associé
-       à la classe "AlgorithmeDeBase".
-       
-    */
-    public ChronometreThread getChronometreThread()
-    {
-       return chronometre;
     }
     
 }

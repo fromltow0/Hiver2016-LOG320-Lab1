@@ -19,29 +19,53 @@ package hiv2016.log320.lab1;
 */
 public class TestAlgorithmes 
 {
+    private static final String CHAINE_1 = "Chaine 1: ";
+    private static final String CHAINE_2 = "Chaine 2: ";
+    private static final String RESULTAT_ALGORITHME_DE_BASE = "Resultat algorithme de base: ";
+    private static final String RESULTAT_DEUXIEME_ALGORITHME = "Resultat de notre algorithme: ";
+    private static final String TEMPS_EXECUTION_ALGORITHME_DE_BASE = "Temps execution algorithme de base: ";
+    private static final String TEMPS_EXECUTION_DEUXIEME_ALGORITHME = "Temps execution de notre algorithme: ";
+    
     public static void main(String[] args)
     {
         AlgorithmeDeBase algorithme = new AlgorithmeDeBase();
         DeuxiemeAlgorithme algorithme2 = new DeuxiemeAlgorithme();
         
-        StringBuilder chaine = new StringBuilder("azertyuiopmlkjnhbgfvcdsxqw123654789874563210mpolkiujhytgfdcqazsedrtryfhcnvkjoilpm78451239220vnvbhjderu  784qdfghjjlmpotieytetcgbv12369754123658tpelfyeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqq111111111111111111111111112222222222222222222222225555555555555555555555555555555555555566666666666666666666666666666ccccccccpmlouhjnhsfs");
-        StringBuilder anagramme = new StringBuilder("azertyuiopmlkjnhbgfvcdsxqw123654789874563210mpolkiujhytgfdcqazsedrtryfhcnvkjoilpm78451239220vnvbhjderu  784qdfghjjlmpotieytetcgbv12369754123658tpelfyeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqqqqqqqqqqqqqqqqqq111111111111111111111111112222222222222222222222225555555555555555555555555555555555555566666666666666666666666666666ccccccccpmlouhjnhsfs");
+        boolean finDeTraitement = false;
+        ChronometreThread chronometre2 = new ChronometreThread(finDeTraitement);
         
+        StringBuilder chaine = new StringBuilder("azerty");
+        StringBuilder anagramme = new StringBuilder("azerty");
         
-        char[] chaineArray = algorithme2.getCharArrayFromString( chaine.toString() );
-        char[] anagrammeArray = algorithme2.getCharArrayFromString( anagramme.toString() );
+        String chaine_ = chaine.toString();
+        String anagramme_ = anagramme.toString();
+        
+        char[] chaineArray = algorithme2.getCharArrayFromString( chaine_ );
+        char[] anagrammeArray = algorithme2.getCharArrayFromString( anagramme_ );
         
         Boolean trouve = algorithme.estUnAnagramme(anagramme, chaine);
-        Boolean trouve2 = algorithme2.estUnAnagramme(anagrammeArray, chaineArray);
         
-        System.out.println(trouve);
-        System.out.println(trouve2);
+        chronometre2.start();
+        Boolean trouve2 = algorithme2.estUnAnagramme(anagrammeArray, chaineArray);
+        finDeTraitement = true;
+        
+        chronometre2.setFinDeTraitement(finDeTraitement);
+        
+        System.out.println(CHAINE_1 + chaine_);
+        System.out.println(CHAINE_2 + anagramme_);
+        
+        System.out.print("\n");
+        
+        System.out.println(RESULTAT_ALGORITHME_DE_BASE + trouve);
+        System.out.println(RESULTAT_DEUXIEME_ALGORITHME + trouve2);
+        
+        System.out.print("\n");
         
         ChronometreThread chronometre = algorithme.getChronometreThread();
-        ChronometreThread chronometre2 = algorithme2.getChronometreThread(); 
-        
+        System.out.print(TEMPS_EXECUTION_ALGORITHME_DE_BASE );
         chronometre.afficherTempsExecution();
-        chronometre2.afficherTempsExecution();
+        System.out.print(TEMPS_EXECUTION_DEUXIEME_ALGORITHME );
+        chronometre2.afficherTempsExecution();   
     }
     
 }

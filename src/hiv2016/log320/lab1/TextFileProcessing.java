@@ -26,24 +26,23 @@ import java.util.logging.Logger;
                   1-Recuperation des donnees contenues dans les fichiers texte.
                   2-Pour chaque ensemble de lettres present dans le dictionnaire
                   et a partir duquel est forme un ou plusieurs mots du
-                  dictionnaire,il ya determinatin du nombred'anagrammes presents
+                  dictionnaire,il ya determination du nombred'anagrammes presents
                   dans le dictionnaire et etablissement d'une correspondance
                   entre cet ensemble de lettres et son nombre d'anagrammes grace
                   a une hashmap.
                   3-Creation d'une structure de donnees contenant les mots pour
-                  lesquels on veut trouver le nombre d'anagrammes dans le
+                  lesquels on veut trouver le nombre d'anagrammes presents dans le
                   dictionnaire.
                   4-Creation d'une structure de donnees contenant les mots du
                   dictionnaire pour lesquels on a determine le nombre
-                  d'anagrammes presentsdans le dictionnaire.Cette structure
+                  d'anagrammes presents dans le dictionnaire.Cette structure
                   de donnees optimisera le processus de detection du nombre 
                   d'anagrammes pour chaque mot de notre liste de mots dans 
                   laquelle se trouvent les mots pour lesquels on desire
                   connaitre le nombre d'anagrammes presents dans le
                   dictionnaire.
                  
-                  
-                      
+                                   
 *Constructors   :
     public TextFileProcessing()
 
@@ -73,7 +72,7 @@ public class TextFileProcessing
     private BufferedReader bufferDictionnaire;
     
     //Cette variable contient la liste de mots pour lesquels on veut determiner
-    //lenombre d'anagrammes presents dans le dictionnaire.
+    //le nombre d'anagrammes presents dans le dictionnaire.
     private ArrayList<char[]> listeDeMots;
     
     //Cette variable contient tous les mots du dictionnaire.
@@ -84,22 +83,10 @@ public class TextFileProcessing
     //le nombre d'anarammes presents dans le dictionnaire.
     ArrayList<char[]> tableauMotsDictionnaire;
     
-    private HashMap mot_nombreAnagrammes;
+    private HashMap<char[], Integer> motDictionnaire_nombreAnagrammes;
     
-    private HashMap motDictionnaire_nombreAnagrammes;
-    
+    //Objet contenant l'algorithme de detection d'anagrammes.
     private DeuxiemeAlgorithme algorithme2;
-    
-    public static void main(String[] args)
-    {
-        TextFileProcessing traitement = new TextFileProcessing();
-        
-        traitement.creerListeDeMotsEnMemoire();
-        traitement.creerListeDeMotsDictionnaire();
-        traitement.determinerAnagrammesDictionnaire();
-        traitement.remplirTableauMotsDictionnaire();
-        
-    }
     
     /*************************************
       CONSTRUCTOR  : TextFileProcessing
@@ -112,7 +99,7 @@ public class TextFileProcessing
                      correspondant au chemin d'accès du fichier texte
                      qui représente le dictionnaire.
                      Ensuite, des tampons de lecture sont créés afin de
-                     lire les chaines de caractères contenus dans le
+                     lire les chaines de caractères contenues dans le
                      fichier texte qui contient les mots à analyser
                      et dans le fichier texte qui represente notre
                      dictionnaire.
@@ -147,13 +134,10 @@ public class TextFileProcessing
             //Initialisation de la liste de mots du dictionnaire.
             motsDuDictionnaire = new ArrayList<char[]>();
             
-            tableauMotsDictionnaire = new ArrayList<char[]>();
-            
-            //Initialisation de la hashmap mot-nombreAnagrammes.
-            mot_nombreAnagrammes = new HashMap();    
+            tableauMotsDictionnaire = new ArrayList<char[]>();    
             
             //Initialisation de la hashmap motDictionnaire_nombreAnagrammes.
-            motDictionnaire_nombreAnagrammes = new HashMap();
+            motDictionnaire_nombreAnagrammes = new HashMap<char[], Integer>();
             
             algorithme2 = new DeuxiemeAlgorithme();
         } 
@@ -168,10 +152,9 @@ public class TextFileProcessing
      *************************************
     *Description    : Cette fonction lit les mots contenus dans le fichier
                       texte contenant les mots à analyser, élimine les espaces
-                      contenus dans ces mots, mets ces mots en minuscules,
-                      convertit ces mots en tableaux de caracteres et place ces
-                      tableaux de caractères dans la structure de données 
-                      représentant notre liste de mots.
+                      contenus dans ces mots,convertit ces mots en tableaux de
+                      caracteres et place ces tableaux de caractères dans la
+                      structure de données représentant notre liste de mots.
                       
     @param  aucun : 
      
@@ -204,7 +187,7 @@ public class TextFileProcessing
                     
                     /*
                     Cette variable prend la valeur "true" lorsque un mot
-                    qu'on veut inserer dans la liste e mots du dictionnaire
+                    qu'on veut inserer dans la liste de mots du dictionnaire
                     contient un caractere en majuscule.Elle prend la valeur
                     "false" dans le cas contraire.
                     */
@@ -235,7 +218,8 @@ public class TextFileProcessing
                     }
                     
                     //S'il n'y a pas de majuscule, on ajoute le mot à la liste
-                    //de mots du dictionnaire.
+                    //de mots pour lesquels on veut determiner le nombre
+                    //d'anagrammes presents dans le dictionnaire.
                     if( !majuscule )
                     {
                         listeDeMots.add(motDeLaListeDeMots);
@@ -249,9 +233,9 @@ public class TextFileProcessing
                     
                     /*
                     Cette variable prend la valeur "true" lorsque un mot
-                    qu'on veut inserer dans la liste e mots du dictionnaire
-                    contient un caractere en majuscule.Elle prend la valeur
-                    "false" dans le cas contraire.
+                    qu'on veut inserer dans la liste de mots contient un
+                    caractere en majuscule.Elle prend la valeur "false" dans
+                    le cas contraire.
                     */
                     boolean majuscule = false;
                     while( i < motDeLaListeDeMots.length )
@@ -280,7 +264,7 @@ public class TextFileProcessing
                     }
                     
                     //S'il n'y a pas de majuscule, on ajoute le mot à la liste
-                    //de mots du dictionnaire.
+                    //de mots.
                     if( !majuscule )
                     {
                        listeDeMots.add(motDeLaListeDeMots);
@@ -299,10 +283,10 @@ public class TextFileProcessing
      *************************************
     *Description    : Cette fonction lit les mots contenus dans le fichier
                       texte représentant le dictionnaire,élimine les espaces
-                      contenus dans ces mots, mets ces mots en minuscules,
-                      convertit ces mots en tableaux de caracteres et place ces
-                      tableaux de caractères dans la structure de données 
-                      chargée de contenir les mots du dictionnaire.
+                      contenus dans ces mots,convertit ces mots en tableaux de
+                      caracteres et place ces tableaux de caractères dans la
+                      structure de données chargée de contenir les mots du 
+                      dictionnaire.
                       
     @param  aucun : 
      
@@ -334,8 +318,8 @@ public class TextFileProcessing
                     int i = 0;
                     
                     /*
-                    Cette variable prend la valeur "true" lorsque un mot
-                    qu'on veut inserer dans la liste e mots du dictionnaire
+                    Cette variable prend la valeur "true" lorsqu'un mot
+                    qu'on veut inserer dans la liste de mots du dictionnaire
                     contient un caractere en majuscule.Elle prend la valeur
                     "false" dans le cas contraire.
                     */
@@ -379,8 +363,8 @@ public class TextFileProcessing
                     int i = 0;
                     
                     /*
-                    Cette variable prend la valeur "true" lorsque un mot
-                    qu'on veut inserer dans la liste e mots du dictionnaire
+                    Cette variable prend la valeur "true" lorsqu'un mot
+                    qu'on veut inserer dans la liste de mots du dictionnaire
                     contient un caractere en majuscule.Elle prend la valeur
                     "false" dans le cas contraire.
                     */
@@ -425,6 +409,20 @@ public class TextFileProcessing
         }   
     }
     
+    /*************************************
+      FUNCTION  : determinerAnagrammesDictionnaire
+     *************************************
+    *Description : Cette fonction determine pour chaque ensemble de lettres 
+                   constituant un mot du dictionnaire le nombre d'anagrammes
+                   presents dans le dictionnaire.
+                      
+    *Parameters  :
+     - aucun
+     
+    @return      : 
+     - void.
+       
+    */
     public void determinerAnagrammesDictionnaire()
     {
         /*
@@ -438,7 +436,7 @@ public class TextFileProcessing
         pour le mot "zea".A ce moment, nous nous rendons compte que "aze" et
         "zea" représentent le meme ensemble de lettres et possèdent donc le 
         meme nombre d'anagrammes.Vu que nous avons déja déterminé le nombre
-        d'anagrammes pour l'ensemble consititué des lettres 'a', 'z', 'e',
+        d'anagrammes pour l'ensemble constitué des lettres 'a', 'z', 'e',
         il est inutile de chercher le nombre d'anagrammes pour "zea".Si
         l'ensemble de lettres constituant le mot pour lequel on cherche le 
         nombre d'anagrammes était différent de l'ensemble contenant les
@@ -446,7 +444,6 @@ public class TextFileProcessing
         d'anagrammes de cet ensemble n'a pas encore été déterminé et nous
         l'aurions calculé.Après avoir travaillé avec "zea", nous passons au
         mot suivant qui est "eza" et nous repetons le meme processus.
-        passons donc au mot suivant et repetons le meme processus.
         */
         for(int i = 0; i < motsDuDictionnaire.size(); i++)
         {
@@ -510,13 +507,18 @@ public class TextFileProcessing
             //dictionnaire.
             if(nombreAnagrammes > ZERO)
             {
-                motDictionnaire_nombreAnagrammes.put( mot1, nombreAnagrammes );
+                String motDico = String.valueOf(mot1);
+                
+                Integer leNombreAnagrammes = new Integer(nombreAnagrammes );
+                
+                char[] unMotDuDictionnaire = motDico.toCharArray();
+                motDictionnaire_nombreAnagrammes.put( unMotDuDictionnaire, leNombreAnagrammes );
             }
         } 
     }
     
-     /*************************************
-      FUNCTION  : getListeDeMots
+    /*************************************
+      FUNCTION  : remplirTableauMotsDictionnaire
      *************************************
     *Description : Cette fonction crée un tableau contenant les mots du dictionnaire
                    qui figurent dans la hashmap qui etablit la correspondance entre
@@ -524,7 +526,7 @@ public class TextFileProcessing
                    le dictionnaire.La hashmap qui etablit la correspondance entre 
                    un mot du dictionnaire et le nombre d'anagrammes de ce mot dans
                    le dictionnaire doit etre au prealable etablie avant de pouvoir 
-                   appeler cette fonction.Ce tableau sera utilise pour reduire optimiser
+                   appeler cette fonction.Ce tableau sera utilise pour reduire
                    le temps de detection du nombre d'anagrammes de chaque mot de la
                    la liste de mots.
                       
@@ -547,11 +549,14 @@ public class TextFileProcessing
             Map.Entry entree = (Map.Entry)i.next();
             
             //Recuperer la cle de l'entree que l'on a recuperee precedemment
-            //et convertir cette cle en chaine de caracteres.
-            String unMot = String.valueOf(entree.getKey());
+            //et convertir cette cle en tableau de caracteres.
+            char[] tableauCaracteres = (char[]) entree.getKey();
+            
+            //Convertir le tableau de caracteres en chaines de caracteres.
+            String motDico = String.valueOf(tableauCaracteres);
             
             //Convertir la chaine de caracteres en tableau de caracteres.
-            char[] motDuDictionnaire = unMot.toCharArray();
+            char[] motDuDictionnaire = motDico.toCharArray();
             
             //Ajouter le tableau de caracteres  au tableau.
             tableauMotsDictionnaire.add(motDuDictionnaire);

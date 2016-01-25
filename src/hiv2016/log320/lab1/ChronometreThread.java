@@ -21,7 +21,6 @@ package hiv2016.log320.lab1;
 */
 public class ChronometreThread extends Thread
 {
-    private static final String MSG_TPS_EXEC = "Temps d\'execution : ";
     private static final String MSG_NANOSEC = " nanosecondes.";
     
     //Variable mise à "true" pour indiquer à la classe "ChronometreThread"
@@ -151,7 +150,7 @@ public class ChronometreThread extends Thread
    {
        long tempsExecution = this.getTempsExecution();
        
-       System.out.println( MSG_TPS_EXEC + tempsExecution + MSG_NANOSEC);
+       System.out.println( tempsExecution + MSG_NANOSEC);
    }
     
 }
