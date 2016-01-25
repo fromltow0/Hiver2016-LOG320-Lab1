@@ -74,7 +74,7 @@ public class MappingMotsAnagrammesDictionnaire
     //"compterAngagrammesDesMots".
     private ChronometreThread chronometre;
     
-     /*************************************
+    /*************************************
       CONSTRUCTOR  : MappingMotsAnagrammesDictionnaire
      *************************************
     *Description   : 
