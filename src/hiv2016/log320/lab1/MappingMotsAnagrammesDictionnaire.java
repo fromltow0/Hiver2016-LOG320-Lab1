@@ -77,11 +77,6 @@ public class MappingMotsAnagrammesDictionnaire
     /*************************************
       CONSTRUCTOR  : MappingMotsAnagrammesDictionnaire
      *************************************
-    *Description   : 
-                                      
-    *Parameters    :
-    @param  aucun  : 
- 
     */
     public MappingMotsAnagrammesDictionnaire()
     {

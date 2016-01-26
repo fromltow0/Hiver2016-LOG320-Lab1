@@ -98,8 +98,6 @@ public class DeuxiemeAlgorithme
         //alors retourner "false".
         if(chaine1.length != chaine2.length)
         {
-            //finDeTraitement = true;
-            //chronometre.setFinDeTraitement(finDeTraitement);
             return false;
         }
         

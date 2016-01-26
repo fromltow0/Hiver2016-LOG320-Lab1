@@ -104,8 +104,6 @@ public class ChronometreThread extends Thread
                               encore la fin d'exécution d'une suite
                               d'instructions.
      
-    
-    
     @return                 : 
      - void.
        

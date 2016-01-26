@@ -23,11 +23,6 @@ public class AnagramDetectionLauncher
     /*************************************
       CONSTRUCTOR  : AnagramDetectionLauncher
      *************************************
-    *Description   : 
-                                      
-    *Parameters    :
-    @param  aucun  : 
- 
     */
     public AnagramDetectionLauncher()
     {
