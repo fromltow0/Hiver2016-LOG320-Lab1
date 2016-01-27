@@ -30,17 +30,7 @@ import java.util.logging.Logger;
                   dans le dictionnaire et etablissement d'une correspondance
                   entre cet ensemble de lettres et son nombre d'anagrammes grace
                   a une hashmap.
-                  3-Creation d'une structure de donnees contenant les mots pour
-                  lesquels on veut trouver le nombre d'anagrammes presents dans le
-                  dictionnaire.
-                  4-Creation d'une structure de donnees contenant les mots du
-                  dictionnaire pour lesquels on a determine le nombre
-                  d'anagrammes presents dans le dictionnaire.Cette structure
-                  de donnees optimisera le processus de detection du nombre 
-                  d'anagrammes pour chaque mot de notre liste de mots dans 
-                  laquelle se trouvent les mots pour lesquels on desire
-                  connaitre le nombre d'anagrammes presents dans le
-                  dictionnaire.
+                  
                  
                                    
 *Constructors   :
@@ -49,11 +39,8 @@ import java.util.logging.Logger;
 *Methods        :
     public void creerListeDeMotsEnMemoire()
     public void creerListeDeMotsDictionnaire()
-    public void determinerAnagrammesDictionnaire()
-    public void remplirTableauMotsDictionnaire()
     public ArrayList<char[]>getListeDeMots()
-    public HashMap getMotDictionnaire_nombreAnagrammes()
-    public ArrayList<char[]> getTableauMotsDictionnaire()
+    public ArrayList<char[]> getMotsDuDictionnaire()
     
 */
 public class TextFileProcessing 
@@ -77,13 +64,7 @@ public class TextFileProcessing
     
     //Cette variable contient tous les mots du dictionnaire.
     private ArrayList<char[]> motsDuDictionnaire;
-    
-    //Cette variable contient les ensembles de lettres qui constituent des mots
-    //qui sont presents dans le dictionnaire et pour lesquels on a determine
-    //le nombre d'anarammes presents dans le dictionnaire.
-    ArrayList<char[]> tableauMotsDictionnaire;
-    
-    private HashMap<char[], Integer> motDictionnaire_nombreAnagrammes;
+   
     
     //Objet contenant l'algorithme de detection d'anagrammes.
     private DeuxiemeAlgorithme algorithme2;
@@ -133,11 +114,6 @@ public class TextFileProcessing
             
             //Initialisation de la liste de mots du dictionnaire.
             motsDuDictionnaire = new ArrayList<char[]>();
-            
-            tableauMotsDictionnaire = new ArrayList<char[]>();    
-            
-            //Initialisation de la hashmap motDictionnaire_nombreAnagrammes.
-            motDictionnaire_nombreAnagrammes = new HashMap<char[], Integer>();
             
             algorithme2 = new DeuxiemeAlgorithme();
         } 
@@ -410,160 +386,6 @@ public class TextFileProcessing
     }
     
     /*************************************
-      FUNCTION  : determinerAnagrammesDictionnaire
-     *************************************
-    *Description : Cette fonction determine pour chaque ensemble de lettres 
-                   constituant un mot du dictionnaire le nombre d'anagrammes
-                   presents dans le dictionnaire.
-                      
-    *Parameters  :
-     - aucun
-     
-    @return      : 
-     - void.
-       
-    */
-    public void determinerAnagrammesDictionnaire()
-    {
-        /*
-        On verifie d'abord si pour un ensemble de lettres qui constitue un mot
-        du dictionnaire, le nombre d'anagrammes présents dans le dictionnaire
-        a déja été trouvé.Si le nombre d'anagrammes a déja été trouvé on ne 
-        le calcule plus et on passe au mot suivant.Exemple:Dans le 
-        dictionnaire, nous avons les mots "aze", "zea", "eza", "qsd", "aze".
-        Nous commencons par chercher le nombre d'anagrammes du mot "aze".Nous
-        trouvons 4 anagrammes.Ensuite, nous cherchons le nombre d'anagrammes
-        pour le mot "zea".A ce moment, nous nous rendons compte que "aze" et
-        "zea" représentent le meme ensemble de lettres et possèdent donc le 
-        meme nombre d'anagrammes.Vu que nous avons déja déterminé le nombre
-        d'anagrammes pour l'ensemble constitué des lettres 'a', 'z', 'e',
-        il est inutile de chercher le nombre d'anagrammes pour "zea".Si
-        l'ensemble de lettres constituant le mot pour lequel on cherche le 
-        nombre d'anagrammes était différent de l'ensemble contenant les
-        lettres 'a', 'z', 'e', nous aurions constaté que le nombre
-        d'anagrammes de cet ensemble n'a pas encore été déterminé et nous
-        l'aurions calculé.Après avoir travaillé avec "zea", nous passons au
-        mot suivant qui est "eza" et nous repetons le meme processus.
-        */
-        for(int i = 0; i < motsDuDictionnaire.size(); i++)
-        {
-            //Cette variable represente le nombre d'anagrammes d'un mot
-            //du dictionnaire.
-            int nombreAnagrammes = 0;
-            
-            //Recuperer chaque mot du dictionnaire.
-            char[] mot1 = motsDuDictionnaire.get(i);
-            
-            
-            int j = i - 1;
-            
-            //Si pour un ensemble de mots, le nombre d'anagrammes a déja été
-            //déterminé, cette variable prend la valeur "true", sinon elle
-            //prend la valeur "false".
-            boolean anagrammeDejaEvalue = false;
-            
-            while( j >= 0 && (!anagrammeDejaEvalue) )
-            {
-                //Recuperer chaque mot precedant le mot pour lequel on 
-                //veut determiner le nombre d'anagrammes.
-                char[] mot2 = motsDuDictionnaire.get(j);
-                
-                //Determiner si chaque mot qui précède le mot pour lequel
-                //on veut determiner le nombre d'anagrammes est un anagramme
-                //du mot pour lequel on veut determiner le nombre d'anagramme.
-                anagrammeDejaEvalue = algorithme2.estUnAnagramme(mot2, mot1);
-                
-                j -= 1;
-            }
-            
-            //Si on n'a pas encore trouve le nombre d'anagrammes du mot pour
-            //lequel on veut determiner le nombre d'anagrammes
-            if( !anagrammeDejaEvalue )
-            {
-                /*
-                On est certain que les mots précédant le mot pour lequel on
-                veut determiner le nombre d'anagrammes ne sont pas des
-                anagrammes du mot pour lequel on veut determiner le nombre
-                d'anagrammes.On debute donc la recherche d'anagrammes dans la
-                structure contenant les mots du dictionnaire à partir de
-                l'indice d'acces au mot  pour lequel on veut determiner le
-                nombre d'anagrammes.
-                */
-                for(int k = i; k < motsDuDictionnaire.size(); k++)
-                {
-                    char[] mot3 = motsDuDictionnaire.get(k);
-                    
-                    boolean anagramme = algorithme2.estUnAnagramme(mot3, mot1);
-                    
-                    if( anagramme )
-                    {
-                        nombreAnagrammes += 1;
-                    }   
-                }
-            } 
-            
-            //On utilise un hashmap pour établir une correspondance entre
-            //un mot du dictionnaire et son nombre d'anagrammes dans le
-            //dictionnaire.
-            if(nombreAnagrammes > ZERO)
-            {
-                String motDico = String.valueOf(mot1);
-                
-                Integer leNombreAnagrammes = new Integer(nombreAnagrammes );
-                
-                char[] unMotDuDictionnaire = motDico.toCharArray();
-                motDictionnaire_nombreAnagrammes.put( unMotDuDictionnaire, leNombreAnagrammes );
-            }
-        } 
-    }
-    
-    /*************************************
-      FUNCTION  : remplirTableauMotsDictionnaire
-     *************************************
-    *Description : Cette fonction crée un tableau contenant les mots du dictionnaire
-                   qui figurent dans la hashmap qui etablit la correspondance entre
-                   un mot du dictionnaire et le nombre d'anagrammes de ce mot dans 
-                   le dictionnaire.La hashmap qui etablit la correspondance entre 
-                   un mot du dictionnaire et le nombre d'anagrammes de ce mot dans
-                   le dictionnaire doit etre au prealable etablie avant de pouvoir 
-                   appeler cette fonction.Ce tableau sera utilise pour reduire
-                   le temps de detection du nombre d'anagrammes de chaque mot de la
-                   la liste de mots.
-                      
-    *Parameters  :
-     - aucun
-     
-    @return      : 
-     - void.
-       
-    */
-    public void remplirTableauMotsDictionnaire()
-    {
-        Set ensemble = motDictionnaire_nombreAnagrammes.entrySet();
-        
-        Iterator i = ensemble.iterator();
-    
-        while( i.hasNext() )
-        {
-            //Recuperer une entree de la hashmap.
-            Map.Entry entree = (Map.Entry)i.next();
-            
-            //Recuperer la cle de l'entree que l'on a recuperee precedemment
-            //et convertir cette cle en tableau de caracteres.
-            char[] tableauCaracteres = (char[]) entree.getKey();
-            
-            //Convertir le tableau de caracteres en chaines de caracteres.
-            String motDico = String.valueOf(tableauCaracteres);
-            
-            //Convertir la chaine de caracteres en tableau de caracteres.
-            char[] motDuDictionnaire = motDico.toCharArray();
-            
-            //Ajouter le tableau de caracteres  au tableau.
-            tableauMotsDictionnaire.add(motDuDictionnaire);
-        }
-    }
-    
-    /*************************************
       FUNCTION  : getListeDeMots
      *************************************
     *Description : Cette fonction retourne la liste de mots à analyser. 
@@ -580,24 +402,6 @@ public class TextFileProcessing
         return listeDeMots;
     }
     
-    /*************************************
-      FUNCTION  : getMotDictionnaire_nombreAnagrammes
-     *************************************
-    *Description : Cette fonction retourne la hashmap qui fait la correspondance
-                   entre chaque mot du dictionnaire et le nombre d'anagrammes
-                   de chaque mot du dictionnaire. 
-                      
-    *Parameters  :
-     - aucun
-     
-    @return      : 
-     - HashMap.
-       
-    */
-    public HashMap getMotDictionnaire_nombreAnagrammes()
-    {
-        return motDictionnaire_nombreAnagrammes;
-    }
     
     /*************************************
       FUNCTION  : getTableauMotsDictionnaire
@@ -613,8 +417,8 @@ public class TextFileProcessing
      - ArrayList<char[]>.
        
     */
-    public ArrayList<char[]> getTableauMotsDictionnaire()
+    public ArrayList<char[]> getMotsDuDictionnaire()
     {
-        return tableauMotsDictionnaire;
+        return motsDuDictionnaire;
     }
 }

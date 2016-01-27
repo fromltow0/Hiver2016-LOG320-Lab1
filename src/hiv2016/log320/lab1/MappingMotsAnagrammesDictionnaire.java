@@ -35,6 +35,7 @@ import java.util.Set;
 *Methods        :
     public void pretraiterFichiersTexte()
     public void compterAnagrammesDesMots()
+    public void afficherResultats()
 */
 public class MappingMotsAnagrammesDictionnaire 
 {
@@ -48,16 +49,9 @@ public class MappingMotsAnagrammesDictionnaire
     //d'anagrammes dans le dictionnaire.
     private ArrayList<char[]> listeDeMots;
     
-    //Structure de donnees contenant les ensembles de lettres representant les
-    //mots du dictionnaire pour lesquels on a determine le nombre d'anagrammes
-    //presents dans le dictionnaire.
-    private ArrayList<char[]> tableauMotsDictionnaire;
+    //Structure de donnees contenant les mots du dictionnaire.
+    private ArrayList<char[]> motsDuDictionnaire;
     
-    //Hashmap etablissant la correspondance entre les ensembles de lettres
-    //representant les mots du dictionnaire pour lesquels on a determine le
-    //nombre d'anagrammes presents dans le dictionnaire et le nombre 
-    //d'anagrammes de ces ensembles de lettres.
-    private HashMap<char[], Integer> motDictionnaire_nombreAnagrammes;
     
     //Hashmap etablissant la correspondance entre chaque mot de la liste de mots
     //et le nombre d'anagrammes presents dans le dictionnaire pour chacun de ces
@@ -112,12 +106,11 @@ public class MappingMotsAnagrammesDictionnaire
     {
         traitementFichiersTexte.creerListeDeMotsEnMemoire();
         traitementFichiersTexte.creerListeDeMotsDictionnaire();
-        traitementFichiersTexte.determinerAnagrammesDictionnaire();
-        traitementFichiersTexte.remplirTableauMotsDictionnaire();
+       
         
         listeDeMots = traitementFichiersTexte.getListeDeMots();
-        tableauMotsDictionnaire = traitementFichiersTexte.getTableauMotsDictionnaire();
-        motDictionnaire_nombreAnagrammes = traitementFichiersTexte.getMotDictionnaire_nombreAnagrammes();
+        motsDuDictionnaire = traitementFichiersTexte.getMotsDuDictionnaire();
+        
     }
     
     /*************************************
@@ -146,43 +139,27 @@ public class MappingMotsAnagrammesDictionnaire
             //Récupérer chaque mot de la liste de mots
             char[] mot1 = listeDeMots.get(i);
             
-            //Cette variable represente le nombre d'anagrammes de
-            //chaque mot de la liste.
             int nombreAnagrammes = 0;
             
-            Set ensemble = motDictionnaire_nombreAnagrammes.entrySet();
-        
-            Iterator iterateur = ensemble.iterator();
-        
-            //Cette variable prend la valeur "true" si un anagramme a 
-            //ete trouve.
-            boolean anagramme = false;
-        
-            //On verifie si chaque cle de la hashmap 
-            //"motDictionnaire_nombreAnagrammes" est un anagramme d'un mot de la
-            //liste.
-            while( iterateur.hasNext() && !anagramme )
+            for(int j = 0; j < motsDuDictionnaire.size(); j++)
             {
-                Map.Entry uneEntree = (Map.Entry)iterateur.next();
-            
-                //Recuperer chaque cle de la hashmap 
-                //"motDictionnaire_nombreAnagrammes"
-                char[] mot2 = ( (char[]) uneEntree.getKey() );
-            
-                //Verifier que chaque cle est un anagramme de chaque mot
-                //de la liste.
+                //Récupérer chaque mot du dictionnaire
+                char[] mot2 = motsDuDictionnaire.get(j);
+                
+                boolean anagramme;
+                
+                //Verifier que chaque mot du dictionnaire est un anagramme du 
+                //mot de la liste de mots.
                 anagramme = algorithme2.estUnAnagramme(mot2, mot1);
-            
-                //Si une cle est un anagramme d'un mot de la liste
-                //alors le nombre d'anagrammes de ce mot est le meme
-                //que le nombre d'anagrammes de la cle.
-                if(anagramme)
+                System.out.println(anagramme);
+                
+                if(anagramme == true)
                 {
-                    nombreAnagrammes = (int) uneEntree.getValue();
+                    nombreAnagrammes += 1;
                 }
             }
             
-            mot_nombreAnagrammes.put(mot1, nombreAnagrammes);    
+            mot_nombreAnagrammes.put(mot1, nombreAnagrammes);  
         }  
         
         boolean finDeTraitement = true;

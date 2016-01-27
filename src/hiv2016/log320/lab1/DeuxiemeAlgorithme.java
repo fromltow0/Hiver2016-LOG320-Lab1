@@ -102,13 +102,23 @@ public class DeuxiemeAlgorithme
         }
         
         int valeur = 0;
+        int [] tableau = new int[123];
         
         for(int i = 0; i < chaine1.length; i++)
         {
-            valeur += chaine1[i] - chaine2[i];
+            tableau[ chaine1[i] ] += 1;
+            tableau[ chaine2[i] ] -= 1;
         }
         
-        return ( valeur == ZERO );
+        for(int i = 0; i < tableau.length; i++)
+        {
+            if(tableau[i] != ZERO)
+            {
+                return false;
+            }
+            
+        }
+        return true ;
     }
     
     /*************************************
