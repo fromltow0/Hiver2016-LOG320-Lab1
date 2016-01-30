@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -50,7 +51,8 @@ public class TextFileProcessing
     private static final char ESPACE = ' ';
     private static final int MOINS_UN = -1;
     private static final int ZERO = 0;
-    private static final char CARACTERE_A = 'a';
+    private static final char A_MAJUSCULE = 'A';
+    private static final char Z_MAJUSCULE = 'Z';
     
     private Path cheminMots;
     private Path cheminDictionnaire;
@@ -116,6 +118,7 @@ public class TextFileProcessing
             motsDuDictionnaire = new ArrayList<char[]>();
             
             algorithme2 = new DeuxiemeAlgorithme();
+            
         } 
         catch (IOException ex) 
         {
@@ -157,95 +160,15 @@ public class TextFileProcessing
                     String nouvelleLignePartie2 = ligneActuelle.substring(indexOfEspace + 1);
                     String nouvelleLigne = nouvelleLignePartie1.concat(nouvelleLignePartie2);
                     
-                    motDeLaListeDeMots = nouvelleLigne.toCharArray();
-                    
-                    int i = 0;
-                    
-                    /*
-                    Cette variable prend la valeur "true" lorsque un mot
-                    qu'on veut inserer dans la liste de mots du dictionnaire
-                    contient un caractere en majuscule.Elle prend la valeur
-                    "false" dans le cas contraire.
-                    */
-                    boolean majuscule = false;
-                    while( i < motDeLaListeDeMots.length )
-                    {
-                        int difference = 0;
-                        
-                        /*
-                        On recupere le code ASCII de chaque caractere et on 
-                        soustrait ce code ASCII au code ASCII du caractere
-                        'a'.
-                        */
-                        difference = motDeLaListeDeMots[i] - CARACTERE_A;
-                        
-                        /*
-                        Si le resultat de cette soustraction est un
-                        nombre negatif, alors on est en presence d'un 
-                        caractere en majuscule.La variable "majuscule" prend
-                        alors la valeur "true".
-                        */
-                        if( difference < ZERO )
-                        {
-                            majuscule = true;
-                        }
-                        
-                        i += 1;
-                    }
-                    
-                    //S'il n'y a pas de majuscule, on ajoute le mot à la liste
-                    //de mots pour lesquels on veut determiner le nombre
-                    //d'anagrammes presents dans le dictionnaire.
-                    if( !majuscule )
-                    {
-                        listeDeMots.add(motDeLaListeDeMots);
-                    }    
-                }
+                    motDeLaListeDeMots = nouvelleLigne.toCharArray();   
+                }  
                 else
                 {
                     motDeLaListeDeMots = ligneActuelle.toCharArray();
-                    
-                    int i = 0;
-                    
-                    /*
-                    Cette variable prend la valeur "true" lorsque un mot
-                    qu'on veut inserer dans la liste de mots contient un
-                    caractere en majuscule.Elle prend la valeur "false" dans
-                    le cas contraire.
-                    */
-                    boolean majuscule = false;
-                    while( i < motDeLaListeDeMots.length )
-                    {
-                        int difference = 0;
-                        
-                        /*
-                        On recupere le code ASCII de chaque caractere et on 
-                        soustrait ce code ASCII au code ASCII du caractere
-                        'a'.
-                        */
-                        difference = motDeLaListeDeMots[i] - CARACTERE_A;
-                        
-                        /*
-                        Si le resultat de cette soustraction est un
-                        nombre negatif, alors on est en presence d'un 
-                        caractere en majuscule.La variable "majuscule" prend
-                        alors la valeur "true".
-                        */
-                        if( difference < ZERO )
-                        {
-                            majuscule = true;
-                        }
-                        
-                        i += 1;
-                    }
-                    
-                    //S'il n'y a pas de majuscule, on ajoute le mot à la liste
-                    //de mots.
-                    if( !majuscule )
-                    {
-                       listeDeMots.add(motDeLaListeDeMots);
-                    }    
                 }
+                
+                listeDeMots.add(motDeLaListeDeMots);
+                    
             }
         }
         catch(IOException ex)
@@ -302,22 +225,9 @@ public class TextFileProcessing
                     boolean majuscule = false;
                     while( i < motDuDictionnaire.length )
                     {
-                        int difference = 0;
-                        
-                        /*
-                        On recupere le code ASCII de chaque caractere et on 
-                        soustrait ce code ASCII au code ASCII du caractere
-                        'a'.
-                        */
-                        difference = motDuDictionnaire[i] - CARACTERE_A;
-                        
-                        /*
-                        Si le resultat de cette soustraction est un
-                        nombre negatif, alors on est en presence d'un 
-                        caractere en majuscule.La variable "majuscule" prend
-                        alors la valeur "true".
-                        */
-                        if( difference < ZERO )
+                       
+                        if( (motDuDictionnaire[i] >= A_MAJUSCULE) 
+                                &&  (motDuDictionnaire[i] <= Z_MAJUSCULE) )
                         {
                             majuscule = true;
                         }
@@ -347,22 +257,9 @@ public class TextFileProcessing
                     boolean majuscule = false;
                     while( i < motDuDictionnaire.length )
                     {
-                        int difference = 0;
-                        
-                        /*
-                        On recupere le code ASCII de chaque caractere et on 
-                        soustrait ce code ASCII au code ASCII du caractere
-                        'a'.
-                        */
-                        difference = motDuDictionnaire[i] - CARACTERE_A;
-                        
-                        /*
-                        Si le resultat de cette soustraction est un
-                        nombre negatif, alors on est en presence d'un 
-                        caractere en majuscule.La variable "majuscule" prend
-                        alors la valeur "true".
-                        */
-                        if( difference < ZERO )
+                       
+                        if( (motDuDictionnaire[i] >= A_MAJUSCULE)
+                                &&  (motDuDictionnaire[i] <= Z_MAJUSCULE)  )
                         {
                             majuscule = true;
                         }
@@ -421,4 +318,5 @@ public class TextFileProcessing
     {
         return motsDuDictionnaire;
     }
+    
 }
