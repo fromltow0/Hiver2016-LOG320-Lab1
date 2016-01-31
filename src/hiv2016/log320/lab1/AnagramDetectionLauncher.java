@@ -37,7 +37,7 @@ public class AnagramDetectionLauncher
     }
     
     /*************************************
-      FUNCTION  : start
+      FUNCTION      : start
      *************************************
     *Description    : Cette fonction lance d'abord les operations de traitement
                       du fichier texte qui represente le dictionnaire et du

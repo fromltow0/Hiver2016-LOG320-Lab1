@@ -5,10 +5,10 @@ package hiv2016.log320.lab1;
  *************************************
 @author Louis Wilfried MBOG
     
-*Description    : Cette classe implement un algorithme de base qui verifie qu'un
-                  mot est un anagramme d'un autre mot.Il s'agit de l'algorithme
-                  de la section "Algorithme de base" de l'enonce du laboratoire
-                  1.
+*Description    : Cette classe implemente un algorithme de base qui verifie 
+                  qu'un mot est un anagramme d'un autre mot.Il s'agit de 
+                  l'algorithme de la section "Algorithme de base" de l'enonce
+                  du laboratoire 1.
                       
 *Constructors   :
     public AlgorithmeDeBase()
@@ -37,7 +37,7 @@ public class AlgorithmeDeBase
     }
     
     /*************************************
-      FUNCTION : estUnAnagramme
+      FUNCTION      : estUnAnagramme
      *************************************
     *Description    : Cette fonction vérifie que la chaine de caractères
                       contenue dans la variable "chaine1" et la chaine de
@@ -136,7 +136,7 @@ public class AlgorithmeDeBase
    } 
    
    /*************************************
-      FUNCTION OF TYPE "GETTER"  : getChronometreThread
+      FUNCTION      : getChronometreThread
      *************************************
     *Description    : Cette fonction retourne l'objet représentant le 
                       chronomètre associé à la classe "AlgorithmeDeBase" et

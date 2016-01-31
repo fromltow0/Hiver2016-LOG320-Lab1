@@ -23,16 +23,7 @@ import java.util.logging.Logger;
 *Description    : Cette classe effectue le traitement des fichiers texte.Elle
                   transforme les données contenues dans les fichiers texte de
                   façon à les rendre directement exploitables par un programme
-                  JAVA.Les pretraitements effectues sont les suivants:
-                  1-Recuperation des donnees contenues dans les fichiers texte.
-                  2-Pour chaque ensemble de lettres present dans le dictionnaire
-                  et a partir duquel est forme un ou plusieurs mots du
-                  dictionnaire,il ya determination du nombred'anagrammes presents
-                  dans le dictionnaire et etablissement d'une correspondance
-                  entre cet ensemble de lettres et son nombre d'anagrammes grace
-                  a une hashmap.
-                  
-                 
+                  JAVA.               
                                    
 *Constructors   :
     public TextFileProcessing()
@@ -127,7 +118,7 @@ public class TextFileProcessing
     }
     
     /*************************************
-      FUNCTION  : creerListeDeMotsEnMemoire
+      FUNCTION      : creerListeDeMotsEnMemoire
      *************************************
     *Description    : Cette fonction lit les mots contenus dans le fichier
                       texte contenant les mots à analyser, élimine les espaces
@@ -135,9 +126,9 @@ public class TextFileProcessing
                       caracteres et place ces tableaux de caractères dans la
                       structure de données représentant notre liste de mots.
                       
-    @param  aucun : 
+    @param  aucun   : 
      
-    @return       : 
+    @return         : 
      - void.
        
     */
@@ -178,7 +169,7 @@ public class TextFileProcessing
     }
     
     /*************************************
-      FUNCTION  : creerListeDeMotsDictionnaire
+      FUNCTION      : creerListeDeMotsDictionnaire
      *************************************
     *Description    : Cette fonction lit les mots contenus dans le fichier
                       texte représentant le dictionnaire,élimine les espaces
@@ -187,9 +178,9 @@ public class TextFileProcessing
                       structure de données chargée de contenir les mots du 
                       dictionnaire.
                       
-    @param  aucun : 
+    @param  aucun   : 
      
-    @return       : 
+    @return         : 
      - void.
        
     */
@@ -283,7 +274,7 @@ public class TextFileProcessing
     }
     
     /*************************************
-      FUNCTION  : getListeDeMots
+      FUNCTION   : getListeDeMots
      *************************************
     *Description : Cette fonction retourne la liste de mots à analyser. 
                       
@@ -301,7 +292,7 @@ public class TextFileProcessing
     
     
     /*************************************
-      FUNCTION  : getTableauMotsDictionnaire
+      FUNCTION   : getTableauMotsDictionnaire
      *************************************
     *Description : Cette fonction retourne le tableau contenant les mots du
                    dictionnaire presents dans la hashmap "motDictionnaire_

@@ -6,8 +6,8 @@ package hiv2016.log320.lab1;
  *************************************
 @author Louis Wilfried MBOG
     
-*Description    : This class implements the timer which computes the running
-                  time of a function.
+*Description    : Cette classe implemente le chronometre qui calcule le temps
+                  d'execution d'une fonction.
                       
 *Constructors   :
     public ChronometreThread(boolean finDeTraitement)
@@ -37,9 +37,9 @@ public class ChronometreThread extends Thread
     private long tempsFin = 0l;
     
     /*************************************
-      CONSTRUCTOR  : ChronometreThread
+      CONSTRUCTOR           : ChronometreThread
      *************************************
-    *Description    : 
+    *Description            : 
                                       
     *Parameters             :
     @param  finDeTraitement : 
@@ -72,7 +72,7 @@ public class ChronometreThread extends Thread
     }
     
     /*************************************
-      PROCEDURE OF TYPE "SETTER"  : setFinDeTraitement
+      FUNCTION      : setFinDeTraitement
      *************************************
     *Description    : Cette procédure met la variable "finDeTraitement" à 
                       "true" pour indiquer la fin d'exécution d'un ensemble
@@ -115,7 +115,7 @@ public class ChronometreThread extends Thread
     }
     
     /*************************************
-      FUNCTION  : getTempsExecution
+      FUNCTION      : getTempsExecution
      *************************************
     *Description    : Cette fonction retourne en nanosecondes le temps 
                       d'execution d'une serie d'instructions.
@@ -134,7 +134,7 @@ public class ChronometreThread extends Thread
     }
     
     /*************************************
-      PROCEDURE  : afficherTempsExecution
+      FUNCTION   : afficherTempsExecution
     *************************************
     *Description : Cette procedure affiche le temps 
                    d'execution d'une fonction.

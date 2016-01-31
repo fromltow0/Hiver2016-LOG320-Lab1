@@ -31,7 +31,7 @@ public class DeuxiemeAlgorithme
     }
     
     /*************************************
-      FUNCTION : estUnAnagramme
+      FUNCTION      : estUnAnagramme
      *************************************
     *Description    : Cette fonction vérifie que la chaine de caractères
                       contenue dans la variable "chaine1" et la chaine de
@@ -107,10 +107,10 @@ public class DeuxiemeAlgorithme
         //chaine2 doit etre nulle.
         //On peut avoir les chaines "ac" et "bb".La somme des codes ASCII de 
         //"aa" est egale a la somme des codes ASCII de "bb" pourtant "aa" est
-        //different de "bb".Pour resoudre ce cas il faut faire la difference
-        //de la "somme des restes de la division de chaque code ASCII des 
-        //caracteres de la chaine1 par 2" et de "somme des restes de la division
-        //de chaque code ASCII des caracteres de la chaine2 par 2".
+        //different de "bb".Pour resoudre ce probleme il faut faire la
+        //difference de la "somme des restes de la division de chaque code ASCII
+        //des caracteres de la chaine1 par 2" et de "somme des restes de la
+        //division de chaque code ASCII des caracteres de la chaine2 par 2".
         //Si cette difference est nulle alors chaine1 est un anagramme de
         //chaine2.
         for(int i = 0; i < chaine1.length; i++)
@@ -122,7 +122,7 @@ public class DeuxiemeAlgorithme
     }
     
     /*************************************
-      FUNCTION  : getCharArrayFromString
+      FUNCTION      : getCharArrayFromString
      *************************************
     *Description    : Cette fonction retourne le tableau de caracteres
                       correspondant a une chaine de caracteres passee

@@ -91,14 +91,14 @@ public class MappingMotsAnagrammesDictionnaire
     }
     
      /*************************************
-      FUNCTION  : pretraiterFichiersTexte
+      FUNCTION      : pretraiterFichiersTexte
      *************************************
     *Description    : Cette fonction prepare les donnees a etre utilisees par
-    *                 la fonction "compterAnagrammesDesMots".
+                      la fonction "compterAnagrammesDesMots".
                       
-    @param  aucun : 
+    @param  aucun   : 
      
-    @return       : 
+    @return         : 
      - void.
        
     */
@@ -114,7 +114,7 @@ public class MappingMotsAnagrammesDictionnaire
     }
     
     /*************************************
-      FUNCTION  : compterAnagrammesDesMots()
+      FUNCTION      : compterAnagrammesDesMots()
      *************************************
     *Description    : Cette fonction determine pour chaque mot de la liste de
                       mots le nombre d'anagrammes present dans le dictionnaire.
@@ -123,9 +123,9 @@ public class MappingMotsAnagrammesDictionnaire
                       present dans le dictionnaire et le nombre d'anagrammes 
                       de ce mot dans le dictionnaire.
                       
-    @param  aucun : 
+    @param  aucun   : 
      
-    @return       : 
+    @return         : 
      - void.
        
     */
@@ -166,15 +166,15 @@ public class MappingMotsAnagrammesDictionnaire
     }
     
      /*************************************
-      FUNCTION  : afficherResultats()
+      FUNCTION      : afficherResultats()
      *************************************
     *Description    : Cette fonction affiche pour chaque mot de la liste de
                       mot, le nombre d'anagrammes presents dans le dictionnaire
                       ainsi que le nombre total d'anagrammes trouves.
                       
-    @param  aucun : 
+    @param  aucun   : 
      
-    @return       : 
+    @return         : 
      - void.
        
     */
