@@ -96,29 +96,29 @@ public class DeuxiemeAlgorithme
         
         //Si les chaines sont de longueurs differentes
         //alors retourner "false".
-        if(chaine1.length != chaine2.length)
+       if(chaine1.length != chaine2.length)
         {
             return false;
         }
         
         int valeur = 0;
-        int [] tableau = new int[123];
         
+        //La somme des codes ASCII de chaine1 - la somme des codes ASCII de
+        //chaine2 doit etre nulle.
+        //On peut avoir les chaines "ac" et "bb".La somme des codes ASCII de 
+        //"aa" est egale a la somme des codes ASCII de "bb" pourtant "aa" est
+        //different de "bb".Pour resoudre ce cas il faut faire la difference
+        //de la "somme des restes de la division de chaque code ASCII des 
+        //caracteres de la chaine1 par 2" et de "somme des restes de la division
+        //de chaque code ASCII des caracteres de la chaine2 par 2".
+        //Si cette difference est nulle alors chaine1 est un anagramme de
+        //chaine2.
         for(int i = 0; i < chaine1.length; i++)
         {
-            tableau[ chaine1[i] ] += 1;
-            tableau[ chaine2[i] ] -= 1;
+            valeur += chaine1[i] - chaine2[i] + (chaine1[i] % 2) - (chaine2[i] % 2);
         }
         
-        for(int i = 0; i < tableau.length; i++)
-        {
-            if(tableau[i] != ZERO)
-            {
-                return false;
-            }
-            
-        }
-        return true ;
+        return(valeur == ZERO);
     }
     
     /*************************************

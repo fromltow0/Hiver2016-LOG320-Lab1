@@ -34,8 +34,8 @@ public class TestAlgorithmes
         boolean finDeTraitement = false;
         ChronometreThread chronometre2 = new ChronometreThread(finDeTraitement);
         
-        StringBuilder chaine = new StringBuilder("azerty");
-        StringBuilder anagramme = new StringBuilder("azerty");
+        StringBuilder chaine = new StringBuilder("azerty123");
+        StringBuilder anagramme = new StringBuilder("yt321reza");
         
         String chaine_ = chaine.toString();
         String anagramme_ = anagramme.toString();

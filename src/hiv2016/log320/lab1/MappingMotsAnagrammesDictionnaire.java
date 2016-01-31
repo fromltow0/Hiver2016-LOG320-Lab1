@@ -151,7 +151,6 @@ public class MappingMotsAnagrammesDictionnaire
                 //Verifier que chaque mot du dictionnaire est un anagramme du 
                 //mot de la liste de mots.
                 anagramme = algorithme2.estUnAnagramme(mot2, mot1);
-                System.out.println(anagramme);
                 
                 if(anagramme == true)
                 {
